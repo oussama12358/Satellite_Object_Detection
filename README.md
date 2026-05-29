@@ -1,6 +1,14 @@
 # SatDet - Satellite Object Detection
 
-SatDet is a YOLOv8-based object detection project for high-resolution satellite and aerial imagery. It converts DOTA polygon annotations to YOLO horizontal bounding boxes, tiles large images into 640x640 crops, trains a detector, and exposes inference through scripts, FastAPI, and a Streamlit demo.
+Satellite images contain huge areas, tiny objects, and complex scenes. SatDet is built to bridge the gap between raw high-resolution imagery and practical object detection for infrastructure monitoring, maritime surveillance, and disaster response.
+
+This project solves three core challenges:
+
+- Large-scale satellite images that cannot be processed directly by standard object detectors.
+- DOTA-style rotated polygon labels that must be converted into YOLO-compatible horizontal boxes.
+- The need for a complete workflow from dataset preparation and training to inference, API deployment, and interactive visualization.
+
+SatDet uses a YOLOv8s backbone for speed and deployability, tiles large images into 640x640 crops, trains on the processed dataset, and exposes inference through scripts, FastAPI, and a Streamlit demo.
 
 ## Important Paths
 
