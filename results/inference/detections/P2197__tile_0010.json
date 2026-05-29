@@ -1,0 +1,16 @@
+{
+  "file": "P2197__tile_0010.jpg",
+  "detections": [
+    {
+      "x1": 622.1019897460938,
+      "y1": 428.8441162109375,
+      "x2": 640.0,
+      "y2": 521.4769287109375,
+      "confidence": 0.34949737787246704,
+      "class_id": 4,
+      "class_name": "tennis-court"
+    }
+  ],
+  "num_detections": 1,
+  "inference_ms": 35.674095153808594
+}

@@ -1,0 +1,45 @@
+# Core ML
+ultralytics>=8.1.0
+numpy
+opencv-python
+Pillow
+
+# Data processing
+pandas
+shapely
+albumentations
+sahi
+
+# Experiment tracking
+mlflow
+tensorboard
+
+# API
+fastapi
+uvicorn[standard]
+python-multipart
+pydantic
+aiofiles
+
+# Visualization
+streamlit
+matplotlib
+seaborn
+plotly
+
+# ONNX export
+onnx
+onnxruntime
+
+# Utilities
+tqdm
+pyyaml
+loguru
+click
+rich
+python-dotenv
+
+# Testing
+pytest
+pytest-asyncio
+httpx

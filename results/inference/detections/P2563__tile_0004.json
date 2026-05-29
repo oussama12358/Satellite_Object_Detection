@@ -1,0 +1,16 @@
+{
+  "file": "P2563__tile_0004.jpg",
+  "detections": [
+    {
+      "x1": 257.7264404296875,
+      "y1": 0.27825927734375,
+      "x2": 637.9085083007812,
+      "y2": 313.9569091796875,
+      "confidence": 0.5988626480102539,
+      "class_id": 13,
+      "class_name": "soccer-ball-field"
+    }
+  ],
+  "num_detections": 1,
+  "inference_ms": 47.21546173095703
+}

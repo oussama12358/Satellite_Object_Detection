@@ -1,0 +1,16 @@
+{
+  "file": "P0353__tile_0001.jpg",
+  "detections": [
+    {
+      "x1": 284.037841796875,
+      "y1": 614.9639892578125,
+      "x2": 329.15557861328125,
+      "y2": 640.0,
+      "confidence": 0.2655492424964905,
+      "class_id": 10,
+      "class_name": "small-vehicle"
+    }
+  ],
+  "num_detections": 1,
+  "inference_ms": 35.56561470031738
+}

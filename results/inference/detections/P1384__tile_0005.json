@@ -1,0 +1,16 @@
+{
+  "file": "P1384__tile_0005.jpg",
+  "detections": [
+    {
+      "x1": 0.0,
+      "y1": 327.78436279296875,
+      "x2": 16.955947875976562,
+      "y2": 359.32025146484375,
+      "confidence": 0.2524905800819397,
+      "class_id": 2,
+      "class_name": "storage-tank"
+    }
+  ],
+  "num_detections": 1,
+  "inference_ms": 43.98918151855469
+}

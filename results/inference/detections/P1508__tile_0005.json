@@ -1,0 +1,16 @@
+{
+  "file": "P1508__tile_0005.jpg",
+  "detections": [
+    {
+      "x1": 0.0,
+      "y1": 331.75128173828125,
+      "x2": 113.21981811523438,
+      "y2": 501.01849365234375,
+      "confidence": 0.6102660894393921,
+      "class_id": 11,
+      "class_name": "helicopter"
+    }
+  ],
+  "num_detections": 1,
+  "inference_ms": 28.746843338012695
+}

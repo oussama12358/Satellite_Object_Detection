@@ -1,0 +1,16 @@
+{
+  "file": "P2701__tile_0010.jpg",
+  "detections": [
+    {
+      "x1": 311.5521240234375,
+      "y1": 0.0,
+      "x2": 543.162109375,
+      "y2": 177.80770874023438,
+      "confidence": 0.2958783805370331,
+      "class_id": 8,
+      "class_name": "bridge"
+    }
+  ],
+  "num_detections": 1,
+  "inference_ms": 40.26484489440918
+}

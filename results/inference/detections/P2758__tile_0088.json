@@ -1,0 +1,16 @@
+{
+  "file": "P2758__tile_0088.jpg",
+  "detections": [
+    {
+      "x1": 489.8359375,
+      "y1": 306.29132080078125,
+      "x2": 516.2001953125,
+      "y2": 346.77972412109375,
+      "confidence": 0.26309746503829956,
+      "class_id": 9,
+      "class_name": "large-vehicle"
+    }
+  ],
+  "num_detections": 1,
+  "inference_ms": 37.317514419555664
+}

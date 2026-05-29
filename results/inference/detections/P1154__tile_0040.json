@@ -1,0 +1,16 @@
+{
+  "file": "P1154__tile_0040.jpg",
+  "detections": [
+    {
+      "x1": 452.19635009765625,
+      "y1": 370.0589599609375,
+      "x2": 640.0,
+      "y2": 640.0,
+      "confidence": 0.2539285719394684,
+      "class_id": 11,
+      "class_name": "helicopter"
+    }
+  ],
+  "num_detections": 1,
+  "inference_ms": 39.78157043457031
+}

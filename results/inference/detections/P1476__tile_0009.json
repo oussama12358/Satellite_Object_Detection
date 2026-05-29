@@ -1,0 +1,16 @@
+{
+  "file": "P1476__tile_0009.jpg",
+  "detections": [
+    {
+      "x1": 0.0,
+      "y1": 551.640869140625,
+      "x2": 167.08963012695312,
+      "y2": 594.198486328125,
+      "confidence": 0.253519207239151,
+      "class_id": 9,
+      "class_name": "large-vehicle"
+    }
+  ],
+  "num_detections": 1,
+  "inference_ms": 29.016494750976562
+}

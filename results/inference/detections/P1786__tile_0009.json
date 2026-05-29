@@ -1,0 +1,25 @@
+{
+  "file": "P1786__tile_0009.jpg",
+  "detections": [
+    {
+      "x1": 0.0,
+      "y1": 175.89337158203125,
+      "x2": 617.4542236328125,
+      "y2": 640.0,
+      "confidence": 0.5892502069473267,
+      "class_id": 6,
+      "class_name": "ground-track-field"
+    },
+    {
+      "x1": 0.0,
+      "y1": 329.844482421875,
+      "x2": 184.22227478027344,
+      "y2": 532.6456298828125,
+      "confidence": 0.46591946482658386,
+      "class_id": 3,
+      "class_name": "baseball-diamond"
+    }
+  ],
+  "num_detections": 2,
+  "inference_ms": 40.978431701660156
+}

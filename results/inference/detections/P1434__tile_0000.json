@@ -1,0 +1,16 @@
+{
+  "file": "P1434__tile_0000.jpg",
+  "detections": [
+    {
+      "x1": 562.94580078125,
+      "y1": 615.6364135742188,
+      "x2": 597.5107421875,
+      "y2": 640.0,
+      "confidence": 0.30990898609161377,
+      "class_id": 10,
+      "class_name": "small-vehicle"
+    }
+  ],
+  "num_detections": 1,
+  "inference_ms": 37.66179084777832
+}

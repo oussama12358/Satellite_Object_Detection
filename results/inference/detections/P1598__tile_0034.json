@@ -1,0 +1,16 @@
+{
+  "file": "P1598__tile_0034.jpg",
+  "detections": [
+    {
+      "x1": 0.0,
+      "y1": 450.2054138183594,
+      "x2": 35.80653381347656,
+      "y2": 492.3782043457031,
+      "confidence": 0.4970863163471222,
+      "class_id": 12,
+      "class_name": "roundabout"
+    }
+  ],
+  "num_detections": 1,
+  "inference_ms": 51.279306411743164
+}

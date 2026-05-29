@@ -1,0 +1,76 @@
+# =============================================================================
+# SatDet — Training Hyperparameter Configuration
+# Design rationale documented inline for portfolio clarity
+# =============================================================================
+
+# ── Model ─────────────────────────────────────────────────────────────────
+model:
+  architecture: yolov8s          # Small: good speed/accuracy trade-off for satellite imagery
+  pretrained: true               # COCO pretrained — transfer learning critical for small dataset
+  weights: yolov8s.pt            # Auto-downloaded by Ultralytics if not present
+
+# ── Training ──────────────────────────────────────────────────────────────
+training:
+  epochs: 20
+  patience: 8                   # Early stopping — prevents overfitting on limited geo data
+  batch: 6                      # Per-GPU batch; scale with GPU VRAM
+  imgsz: 640                     # Tile size matches tiling pipeline output
+  workers: 2                     # DataLoader workers
+  device: "0"                    # GPU index; "cpu" for dev; "0,1" for multi-GPU
+  amp: false                     # Automatic Mixed Precision — 30-40% VRAM savings
+  seed: 42
+
+# ── Optimizer ─────────────────────────────────────────────────────────────
+optimizer:
+  name: AdamW                    # AdamW outperforms SGD on fine-tuning tasks
+  lr0: 0.0003                   # Initial LR — lower than COCO default due to pretrained weights
+  lrf: 0.01                      # Final LR ratio (lr0 * lrf)
+  momentum: 0.937
+  weight_decay: 0.0005
+  warmup_epochs: 3.0
+  warmup_momentum: 0.8
+  warmup_bias_lr: 0.1
+
+# ── Loss weights ──────────────────────────────────────────────────────────
+# Tuned for small object detection: higher box weight for precise localization
+loss:
+  box: 7.5                       # Box regression loss weight (default 7.5, increase for small obj)
+  cls: 0.5                       # Classification loss weight
+  dfl: 1.5                       # Distribution Focal Loss weight
+
+# ── Augmentation ──────────────────────────────────────────────────────────
+# NOTE: Satellite imagery has unique characteristics:
+#   - No vertical flip constraint (unlike natural images)
+#   - Full 360° rotation valid (no gravity context)
+#   - Scale variation critical for multi-altitude imagery
+augmentation:
+  hsv_h: 0.015                   # Hue jitter (low — satellite sensors are calibrated)
+  hsv_s: 0.7                     # Saturation jitter
+  hsv_v: 0.4                     # Value/brightness jitter
+  degrees: 45.0                  # Rotation: 45° for satellite (full 360° achievable via mosaic)
+  translate: 0.1                 # Translation fraction
+  scale: 0.5                     # Scale jitter — critical for altitude variation
+  shear: 0.0                     # Shear (minimal for satellite)
+  perspective: 0.0               # Perspective (satellite is roughly orthographic)
+  flipud: 0.5                    # Vertical flip: valid for satellite (no gravity context!)
+  fliplr: 0.5                    # Horizontal flip
+  mosaic: 0.3                    # Mosaic augmentation probability — keeps at 1.0
+  mixup: 0.0                     # MixUp probability
+  copy_paste: 0.0                # Copy-paste for small object augmentation
+
+# ── Logging ───────────────────────────────────────────────────────────────
+logging:
+  mlflow:
+    enabled: false
+    experiment: "satdet_yolov8s"
+    tracking_uri: "http://localhost:5000"
+  tensorboard:
+    enabled: true
+  save_period: 3                # Save checkpoint every N epochs
+  plots: true
+
+# ── Output ────────────────────────────────────────────────────────────────
+output:
+  project: "results/train"
+  name: "satdet_v1"
+  exist_ok: false

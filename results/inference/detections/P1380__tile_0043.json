@@ -1,0 +1,16 @@
+{
+  "file": "P1380__tile_0043.jpg",
+  "detections": [
+    {
+      "x1": 380.93798828125,
+      "y1": 0.020660400390625,
+      "x2": 528.3727416992188,
+      "y2": 71.5732421875,
+      "confidence": 0.4664050340652466,
+      "class_id": 14,
+      "class_name": "swimming-pool"
+    }
+  ],
+  "num_detections": 1,
+  "inference_ms": 44.49582099914551
+}

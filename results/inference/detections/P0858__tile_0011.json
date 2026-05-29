@@ -1,0 +1,16 @@
+{
+  "file": "P0858__tile_0011.jpg",
+  "detections": [
+    {
+      "x1": 509.0091552734375,
+      "y1": 0.0,
+      "x2": 639.876953125,
+      "y2": 114.47943878173828,
+      "confidence": 0.2899448573589325,
+      "class_id": 7,
+      "class_name": "harbor"
+    }
+  ],
+  "num_detections": 1,
+  "inference_ms": 47.61672019958496
+}

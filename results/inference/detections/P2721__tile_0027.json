@@ -1,0 +1,16 @@
+{
+  "file": "P2721__tile_0027.jpg",
+  "detections": [
+    {
+      "x1": 476.916015625,
+      "y1": 160.65802001953125,
+      "x2": 553.2991943359375,
+      "y2": 256.70037841796875,
+      "confidence": 0.5301681160926819,
+      "class_id": 6,
+      "class_name": "ground-track-field"
+    }
+  ],
+  "num_detections": 1,
+  "inference_ms": 41.02921485900879
+}

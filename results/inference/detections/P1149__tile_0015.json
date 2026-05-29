@@ -1,0 +1,16 @@
+{
+  "file": "P1149__tile_0015.jpg",
+  "detections": [
+    {
+      "x1": 393.6166687011719,
+      "y1": 0.0,
+      "x2": 640.0,
+      "y2": 153.09173583984375,
+      "confidence": 0.41537538170814514,
+      "class_id": 0,
+      "class_name": "plane"
+    }
+  ],
+  "num_detections": 1,
+  "inference_ms": 45.03893852233887
+}

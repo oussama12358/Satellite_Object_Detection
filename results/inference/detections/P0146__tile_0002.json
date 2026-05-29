@@ -1,0 +1,16 @@
+{
+  "file": "P0146__tile_0002.jpg",
+  "detections": [
+    {
+      "x1": 0.30530548095703125,
+      "y1": 164.3714599609375,
+      "x2": 111.13309478759766,
+      "y2": 471.5374755859375,
+      "confidence": 0.2580057978630066,
+      "class_id": 3,
+      "class_name": "baseball-diamond"
+    }
+  ],
+  "num_detections": 1,
+  "inference_ms": 35.18342971801758
+}

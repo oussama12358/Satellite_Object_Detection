@@ -1,0 +1,25 @@
+{
+  "file": "P1508__tile_0010.jpg",
+  "detections": [
+    {
+      "x1": 513.8854370117188,
+      "y1": 337.91748046875,
+      "x2": 638.6270141601562,
+      "y2": 494.44964599609375,
+      "confidence": 0.5597159266471863,
+      "class_id": 11,
+      "class_name": "helicopter"
+    },
+    {
+      "x1": 0.0,
+      "y1": 0.0,
+      "x2": 637.5850830078125,
+      "y2": 640.0,
+      "confidence": 0.5511795878410339,
+      "class_id": 13,
+      "class_name": "soccer-ball-field"
+    }
+  ],
+  "num_detections": 2,
+  "inference_ms": 52.332162857055664
+}

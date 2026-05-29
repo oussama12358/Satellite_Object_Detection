@@ -1,0 +1,16 @@
+{
+  "file": "P1770__tile_0027.jpg",
+  "detections": [
+    {
+      "x1": 0.0,
+      "y1": 173.19512939453125,
+      "x2": 60.218040466308594,
+      "y2": 257.0359802246094,
+      "confidence": 0.29785576462745667,
+      "class_id": 12,
+      "class_name": "roundabout"
+    }
+  ],
+  "num_detections": 1,
+  "inference_ms": 44.8451042175293
+}

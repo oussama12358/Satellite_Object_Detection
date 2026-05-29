@@ -1,0 +1,25 @@
+{
+  "file": "P2582__tile_0002.jpg",
+  "detections": [
+    {
+      "x1": 0.0,
+      "y1": 288.0701904296875,
+      "x2": 325.94366455078125,
+      "y2": 640.0,
+      "confidence": 0.6095911264419556,
+      "class_id": 13,
+      "class_name": "soccer-ball-field"
+    },
+    {
+      "x1": 234.39154052734375,
+      "y1": 413.38519287109375,
+      "x2": 601.2713623046875,
+      "y2": 640.0,
+      "confidence": 0.5537534356117249,
+      "class_id": 13,
+      "class_name": "soccer-ball-field"
+    }
+  ],
+  "num_detections": 2,
+  "inference_ms": 46.46897315979004
+}

@@ -1,0 +1,25 @@
+{
+  "file": "P2592__tile_0001.jpg",
+  "detections": [
+    {
+      "x1": 86.799072265625,
+      "y1": 161.8280029296875,
+      "x2": 632.8038330078125,
+      "y2": 640.0,
+      "confidence": 0.5749607086181641,
+      "class_id": 6,
+      "class_name": "ground-track-field"
+    },
+    {
+      "x1": 179.35546875,
+      "y1": 285.677001953125,
+      "x2": 640.0,
+      "y2": 640.0,
+      "confidence": 0.2587205767631531,
+      "class_id": 13,
+      "class_name": "soccer-ball-field"
+    }
+  ],
+  "num_detections": 2,
+  "inference_ms": 32.022714614868164
+}

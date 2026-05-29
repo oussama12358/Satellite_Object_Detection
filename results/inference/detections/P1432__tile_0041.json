@@ -1,0 +1,16 @@
+{
+  "file": "P1432__tile_0041.jpg",
+  "detections": [
+    {
+      "x1": 0.7724380493164062,
+      "y1": 54.93647384643555,
+      "x2": 92.99421691894531,
+      "y2": 151.8436737060547,
+      "confidence": 0.2531396746635437,
+      "class_id": 5,
+      "class_name": "basketball-court"
+    }
+  ],
+  "num_detections": 1,
+  "inference_ms": 30.259370803833008
+}

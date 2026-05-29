@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Data (large files — store in DVC or separate storage)
+data/raw/
+data/processed/
+data/splits/
+data/stats/
+
+# Model weights
+models/weights/*.pt
+models/onnx/*.onnx
+models/exports/
+
+# Logs
+logs/
+*.log
+
+# MLflow
+mlruns/
+
+# Environment
+.env
+*.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Docker
+*.tar
+
+# Coverage
+.coverage
+htmlcov/
+.pytest_cache/

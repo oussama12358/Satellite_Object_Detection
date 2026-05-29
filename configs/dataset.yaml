@@ -1,0 +1,56 @@
+# =============================================================================
+# SatDet — Dataset Configuration
+# Compatible with Ultralytics YOLOv8 training format
+# =============================================================================
+
+# Dataset root (relative to project root or absolute)
+path: data/processed/tiled
+
+# Split directories
+train: train/images
+val:   val/images
+
+# Number of classes
+nc: 15
+
+# Class names (DOTA v1.0 full taxonomy)
+names:
+  0:  plane
+  1:  ship
+  2:  storage-tank
+  3:  baseball-diamond
+  4:  tennis-court
+  5:  basketball-court
+  6:  ground-track-field
+  7:  harbor
+  8:  bridge
+  9:  large-vehicle
+  10: small-vehicle
+  11: helicopter
+  12: roundabout
+  13: soccer-ball-field
+  14: swimming-pool
+
+# ── Optional: class weights for imbalanced training ────────────────────────
+# Values inversely proportional to class frequency in dataset
+class_weights:
+  0:  1.0   # plane        (abundant)
+  1:  1.0   # ship         (abundant)
+  2:  0.8   # storage-tank (very abundant)
+  3:  1.5   # baseball-diamond
+  4:  1.5   # tennis-court
+  5:  2.0   # basketball-court
+  6:  2.0   # ground-track-field
+  7:  1.2   # harbor
+  8:  2.5   # bridge       (rare, hard)
+  9:  1.0   # large-vehicle
+  10: 0.8   # small-vehicle (very abundant)
+  11: 3.0   # helicopter   (rare)
+  12: 2.0   # roundabout
+  13: 2.5   # soccer-ball-field
+  14: 1.5   # swimming-pool
+
+# ── Aerospace target classes (subset for portfolio focus) ──────────────────
+# Use this subset config for aircraft/ship/vehicle detection only:
+# nc: 4
+# names: {0: aircraft, 1: ship, 2: vehicle, 3: storage-tank}

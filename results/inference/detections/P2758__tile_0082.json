@@ -1,0 +1,16 @@
+{
+  "file": "P2758__tile_0082.jpg",
+  "detections": [
+    {
+      "x1": 0.0,
+      "y1": 370.27703857421875,
+      "x2": 411.5029296875,
+      "y2": 640.0,
+      "confidence": 0.5844409465789795,
+      "class_id": 1,
+      "class_name": "ship"
+    }
+  ],
+  "num_detections": 1,
+  "inference_ms": 49.921512603759766
+}

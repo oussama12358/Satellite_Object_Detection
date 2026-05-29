@@ -1,0 +1,25 @@
+{
+  "file": "P1463__tile_0018.jpg",
+  "detections": [
+    {
+      "x1": 74.5220947265625,
+      "y1": 6.092041015625,
+      "x2": 640.0,
+      "y2": 640.0,
+      "confidence": 0.8059349656105042,
+      "class_id": 6,
+      "class_name": "ground-track-field"
+    },
+    {
+      "x1": 0.0,
+      "y1": 0.0,
+      "x2": 144.49679565429688,
+      "y2": 150.91427612304688,
+      "confidence": 0.7471324801445007,
+      "class_id": 5,
+      "class_name": "basketball-court"
+    }
+  ],
+  "num_detections": 2,
+  "inference_ms": 55.060625076293945
+}

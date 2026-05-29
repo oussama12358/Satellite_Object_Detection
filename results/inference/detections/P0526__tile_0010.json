@@ -1,0 +1,16 @@
+{
+  "file": "P0526__tile_0010.jpg",
+  "detections": [
+    {
+      "x1": 245.54579162597656,
+      "y1": 0.0,
+      "x2": 458.72265625,
+      "y2": 508.437255859375,
+      "confidence": 0.3154115378856659,
+      "class_id": 7,
+      "class_name": "harbor"
+    }
+  ],
+  "num_detections": 1,
+  "inference_ms": 36.40127182006836
+}

@@ -1,0 +1,16 @@
+{
+  "file": "P1754__tile_0019.jpg",
+  "detections": [
+    {
+      "x1": 74.45975494384766,
+      "y1": 0.0,
+      "x2": 103.96607208251953,
+      "y2": 22.720951080322266,
+      "confidence": 0.407535582780838,
+      "class_id": 2,
+      "class_name": "storage-tank"
+    }
+  ],
+  "num_detections": 1,
+  "inference_ms": 43.056488037109375
+}

@@ -1,0 +1,73 @@
+version: "3.9"
+
+services:
+  # ── Detection API ────────────────────────────────────────────────────────────
+  satdet-api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: satdet-api
+    runtime: nvidia                  # Enable GPU support
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../models:/app/models:ro      # Mount trained weights (read-only)
+      - ../logs:/app/logs
+      - ../runs:/app/runs
+    environment:
+      MODEL_WEIGHTS: /app/models/weights/best.pt
+      DEVICE: cuda:0                  # GPU inference
+      CONF_THRESHOLD: "0.25"
+      IOU_THRESHOLD: "0.45"
+      MAX_IMAGE_MB: "50"
+      NVIDIA_VISIBLE_DEVICES: all     # Expose all GPUs
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+  # ── Streamlit Demo UI ─────────────────────────────────────────────────────────
+  satdet-ui:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: satdet-ui
+    command: streamlit run src/visualization/streamlit_app.py --server.port=8501 --server.address=0.0.0.0
+    ports:
+      - "8501:8501"
+    volumes:
+      - ../models:/app/models:ro
+    environment:
+      MODEL_WEIGHTS: /app/models/weights/best.pt
+    depends_on:
+      - satdet-api
+    restart: unless-stopped
+
+  # ── MLflow Tracking Server ────────────────────────────────────────────────────
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.8.0
+    container_name: satdet-mlflow
+    ports:
+      - "5000:5000"
+    volumes:
+      - mlflow-data:/mlflow
+    command: mlflow server --host 0.0.0.0 --port 5000 --default-artifact-root /mlflow/artifacts
+    restart: unless-stopped
+
+volumes:
+  mlflow-data:
+    driver: local
+
+networks:
+  default:
+    name: satdet-network

@@ -1,0 +1,16 @@
+{
+  "file": "P2625__tile_0039.jpg",
+  "detections": [
+    {
+      "x1": 0.0,
+      "y1": 177.02151489257812,
+      "x2": 87.35623931884766,
+      "y2": 271.53271484375,
+      "confidence": 0.2522130608558655,
+      "class_id": 9,
+      "class_name": "large-vehicle"
+    }
+  ],
+  "num_detections": 1,
+  "inference_ms": 47.51992225646973
+}
