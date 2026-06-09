@@ -4,11 +4,12 @@
 # =============================================================================
 
 # Dataset root (relative to project root or absolute)
-path: data/processed/tiled
+path: data/splits
 
 # Split directories
 train: train/images
 val:   val/images
+test:  test/images
 
 # Number of classes
 nc: 15

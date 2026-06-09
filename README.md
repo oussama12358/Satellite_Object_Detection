@@ -1,6 +1,105 @@
 # SatDet - Satellite Object Detection
 
-Satellite images contain huge areas, tiny objects, and complex scenes. SatDet is built to bridge the gap between raw high-resolution imagery and practical object detection for infrastructure monitoring, maritime surveillance, and disaster response.
+SatDet is a YOLOv8-based satellite object detection project for DOTA-style aerial imagery. It converts rotated DOTA polygon annotations into YOLO-compatible boxes, tiles large satellite images into 640x640 crops, trains a deployable detector, and exposes inference through scripts, FastAPI, and Streamlit.
+
+## Results at a Glance
+
+The current published metrics are **validation-set results from the previous training run**, not final test-set results. They were produced after 20 epochs using `models/weights/best.pt`.
+
+The dataset configuration has now been updated to use a clean train/validation/test layout under `data/splits`:
+
+```text
+train: 14701 tiled images
+val:    3061 tiled images
+test:   3141 tiled images
+```
+
+For a rigorous final report, the model should be retrained on `data/splits/train`, selected with `data/splits/val`, and evaluated once on `data/splits/test`.
+
+```text
+validation precision:   0.629
+validation recall:      0.556
+validation mAP50:       0.544
+validation mAP50-95:    0.284
+```
+
+Additional lightweight validation evaluation saved in `results/eval/metrics.json` reports similar values:
+
+```text
+validation precision mean:   0.650
+validation recall mean:      0.566
+validation mAP50:            0.558
+validation mAP50-95:         0.286
+```
+
+Best-performing validation classes include `plane`, `tennis-court`, `ship`, and `storage-tank`. Harder classes include `helicopter`, `bridge`, and `small-vehicle`, mainly because these objects are rarer, smaller, or more visually ambiguous in tiled satellite scenes.
+
+## Validation vs Test Set
+
+The numbers above are reported on the validation split (`val/images`) and are useful for model selection, training diagnostics, and hyperparameter comparison. They should not be presented as final test-set performance.
+
+The current [configs/dataset.yaml](configs/dataset.yaml) defines all three splits:
+
+```yaml
+path: data/splits
+train: train/images
+val:   val/images
+test:  test/images
+```
+
+The split was created at the source-image level with a fixed seed (`42`) to reduce leakage between train, validation, and test tiles. The split manifest is saved in `data/splits/split_manifest.json`.
+
+Recommended split discipline:
+
+- `train`: used to optimize model weights.
+- `val`: used during development for checkpoint selection and error analysis.
+- `test`: used once at the end for an unbiased final report.
+
+Run validation and test evaluations into separate folders so the artifacts stay clearly separated:
+
+```bash
+python -m src.evaluation.evaluator --weights models/weights/best.pt --data configs/dataset.yaml --split val --output results/val_eval
+```
+
+```bash
+python -m src.evaluation.evaluator --weights models/weights/best.pt --data configs/dataset.yaml --split test --output results/satdet_v1-6_test_eval
+```
+
+## Inference and Confidence Threshold Analysis
+
+A previous batch inference run was completed on the tiled validation images with a confidence threshold of `0.25`:
+
+```text
+input images:       9814
+confidence:         0.25
+total detections:   61314
+average/image:      6.25
+SAHI:               false
+output folder:      results/inference
+```
+
+This threshold is practical for visual inspection because it keeps more candidate detections. For deployment, the threshold should be selected according to the application:
+
+- Lower thresholds such as `0.10-0.25` improve recall and reveal more small or low-confidence objects, but they also increase false positives.
+- Medium thresholds such as `0.30-0.50` are a better default for dashboards or manual review because they reduce noisy boxes while keeping many useful detections.
+- Higher thresholds such as `0.60+` should be used only when false alarms are expensive, because they can miss small vehicles, bridges, and rare classes.
+
+Qualitative inspection should compare the prediction images in `results/satdet_v1-6_train&eval` with the label images:
+
+```text
+val_batch0_pred.jpg     vs     val_batch0_labels.jpg
+val_batch1_pred.jpg     vs     val_batch1_labels.jpg
+val_batch2_pred.jpg     vs     val_batch2_labels.jpg
+```
+
+Observed validation behavior:
+
+- Large, visually distinctive objects such as planes, ships, storage tanks, and tennis courts are detected more reliably.
+- Small dense objects, especially small vehicles, are more sensitive to tiling, overlap, and confidence threshold choice.
+- Rare classes such as helicopter and bridge need careful qualitative review because a high precision or recall value can be unstable when few examples are present.
+- Some DOTA rotated boxes are converted to horizontal boxes, so localization can look less tight for strongly rotated objects.
+
+Future threshold sweeps should run the same inference set at multiple confidence values and compare detection count, false positives, missed objects, and per-class behavior. This makes the deployment threshold a documented choice instead of a default value.
 
 This project solves three core challenges:
 
@@ -15,14 +114,19 @@ SatDet uses a YOLOv8s backbone for speed and deployability, tiles large images i
 ```text
 models/weights/best.pt                 Final trained model for inference/export
 models/weights/last.pt                 Last checkpoint, useful for resuming training
-data/processed/tiled/                  Dataset used for training and validation
+data/splits/                           Active train/validation/test dataset
+data/processed/all_tiled/              Combined tiled source used to create data/splits
+data/processed/tiled/                  Earlier tiled train/validation folders
 configs/dataset.yaml                   Dataset paths and class names
 configs/training.yaml                  Model choice and training hyperparameters
-src/training/trainer.py                Training scriptresults/eval/                          Lightweight evaluation output (metrics and class AP plots)results/satdet_v1-6/                   Training results, plots, metrics, and original checkpoints
+src/training/trainer.py                Training script
+results/eval/                          Lightweight evaluation output
+results/satdet_v1-6_train&eval/        Training results, validation plots, metrics, and original checkpoints
+results/satdet_v1-6_test_eval/         Final test metrics, plots, predictions, and confusion matrices
 ```
 
 The model was trained from the YOLOv8s pretrained checkpoint configured in [configs/training.yaml](configs/training.yaml):
-python -m src.evaluation.evaluator --weights best.pt --data configs/dataset.yaml
+
 ```yaml
 model:
   architecture: yolov8s
@@ -40,18 +144,19 @@ models/weights/best.pt
 The full training run kept for metrics and plots is:
 
 ```text
-results/satdet_v1-6
+results/satdet_v1-6_train&eval
 ```
 
 > Note: there are three different result folders in this project.
 
-> - `results/satdet_v1-6` contains training/evaluation artifacts, plots, and saved checkpoints.
+> - `results/satdet_v1-6_train&eval` contains training/validation artifacts, plots, and saved checkpoints.
+> - `results/satdet_v1-6_test_eval` contains final test-set evaluation metrics, plots, and predictions.
 > - `results/eval` contains lightweight evaluation outputs such as metrics and per-class AP plots.
 > - `results/inference` is reserved for new batch prediction outputs from `src.inference.batch_predictor`.
 
-## Results Summary
+## Validation Results
 
-Final validation metrics after 20 epochs (saved under `results/satdet_v1-6`):
+Final validation metrics after 20 epochs, saved under `results/satdet_v1-6_train&eval`:
 
 ```text
 precision:   0.629
@@ -60,9 +165,9 @@ mAP50:       0.544
 mAP50-95:    0.284
 ```
 
-These values reflect the model performance on the validation dataset using the project evaluation pipeline.
+These values reflect model performance on the validation dataset using the project evaluation pipeline. They are not test-set metrics.
 
-Key evaluation artifacts in `results/satdet_v1-6`:
+Key training/validation artifacts in `results/satdet_v1-6_train&eval`:
 
 - `results.csv` – epoch-by-epoch training and validation metrics
 - `args.yaml` – full training arguments and configuration
@@ -83,10 +188,10 @@ Key evaluation artifacts in `results/satdet_v1-6`:
 The trained model checkpoint used for inference is:
 
 ```text
-results/satdet_v1-6/weights/best.pt
+results/satdet_v1-6_train&eval/weights/best.pt
 ```
 
-If you want to compare with a fresh inference run, use the evaluation command and inspect the generated plots in `results/satdet_v1-6`.
+If you want to compare with a fresh test run, use the evaluation command and inspect the generated plots in `results/satdet_v1-6_test_eval`.
 
 ## Dataset
 
@@ -118,6 +223,8 @@ data/processed/tiled/
   train/labels
   val/images
   val/labels
+  test/images   optional held-out split for final evaluation
+  test/labels   optional held-out split for final evaluation
 ```
 
 Raw DOTA data is expected under:
