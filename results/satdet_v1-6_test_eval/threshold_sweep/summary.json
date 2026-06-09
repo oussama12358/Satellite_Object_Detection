@@ -1,0 +1,29 @@
+{
+  "split": "test",
+  "weights": "models/weights/best.pt",
+  "config": "configs/dataset.yaml",
+  "note": "Confidence-filtered operating-point sweep. Standard mAP is reported separately with a very low confidence threshold.",
+  "results": [
+    {
+      "confidence_threshold": 0.1,
+      "precision": 0.7067209980493029,
+      "recall": 0.6175277238916698,
+      "map50": 0.6025746596038564,
+      "map50_95": 0.3264301669063196
+    },
+    {
+      "confidence_threshold": 0.25,
+      "precision": 0.7351973142075836,
+      "recall": 0.5950266903394764,
+      "map50": 0.5298153226347657,
+      "map50_95": 0.29221282199132453
+    },
+    {
+      "confidence_threshold": 0.5,
+      "precision": 0.8880872649996433,
+      "recall": 0.29974788663336355,
+      "map50": 0.28298132591868375,
+      "map50_95": 0.1677663068480058
+    }
+  ]
+}

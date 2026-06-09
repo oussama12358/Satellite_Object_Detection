@@ -226,12 +226,14 @@ def main():
     parser.add_argument("--conf", type=float, default=0.001)
     parser.add_argument("--output", default="results/eval")
     parser.add_argument("--device", default="0")
+    parser.add_argument("--no-save-json", action="store_true")
     parser.add_argument("--benchmark", action="store_true")
     args = parser.parse_args()
 
     evaluator = SatDetEvaluator(args.weights, args.data, args.device)
     evaluator.run_validation(
         split=args.split, conf=args.conf,
+        save_json=not args.no_save_json,
         output_dir=args.output
     )
 

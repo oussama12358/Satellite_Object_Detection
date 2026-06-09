@@ -84,6 +84,23 @@ This threshold is practical for visual inspection because it keeps more candidat
 - Medium thresholds such as `0.30-0.50` are a better default for dashboards or manual review because they reduce noisy boxes while keeping many useful detections.
 - Higher thresholds such as `0.60+` should be used only when false alarms are expensive, because they can miss small vehicles, bridges, and rare classes.
 
+The confidence sweep below was run on the held-out test split with `models/weights/best.pt`. It shows different operating points rather than replacing the standard low-confidence mAP evaluation:
+
+```text
+Threshold   Precision   Recall   mAP50   mAP50-95
+0.10        0.707       0.618    0.603   0.326
+0.25        0.735       0.595    0.530   0.292
+0.50        0.888       0.300    0.283   0.168
+```
+
+The sweep confirms the expected trade-off: increasing the confidence threshold improves precision, but it sharply reduces recall. A threshold around `0.25` is a reasonable visual-inspection/default operating point for this model, while `0.50` is more conservative and misses many true objects.
+
+The sweep artifacts are saved under:
+
+```text
+results/satdet_v1-6_test_eval/threshold_sweep/
+```
+
 Qualitative inspection should compare the prediction images in `results/satdet_v1-6_train&eval` with the label images:
 
 ```text
@@ -99,7 +116,7 @@ Observed validation behavior:
 - Rare classes such as helicopter and bridge need careful qualitative review because a high precision or recall value can be unstable when few examples are present.
 - Some DOTA rotated boxes are converted to horizontal boxes, so localization can look less tight for strongly rotated objects.
 
-Future threshold sweeps should run the same inference set at multiple confidence values and compare detection count, false positives, missed objects, and per-class behavior. This makes the deployment threshold a documented choice instead of a default value.
+Future threshold sweeps can extend this analysis with more confidence values and per-class detection counts to refine the deployment threshold.
 
 This project solves three core challenges:
 
