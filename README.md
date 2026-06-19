@@ -6,12 +6,12 @@ SatDet is a YOLOv8-based satellite object detection project for DOTA-style aeria
 
 The current published metrics are **validation-set results from the previous training run**, not final test-set results. They were produced after 20 epochs using `models/weights/best.pt`.
 
-The dataset configuration has now been updated to use a clean train/validation/test layout under `data/splits`:
+The dataset configuration has now been updated to use a clean train/validation/test layout under `data/splits`, with a smaller validation split and a larger final test split:
 
 ```text
-train: 14701 tiled images
-val:    3061 tiled images
-test:   3141 tiled images
+train: 70%
+val:   10%
+test:  20%
 ```
 
 For a rigorous final report, the model should be retrained on `data/splits/train`, selected with `data/splits/val`, and evaluated once on `data/splits/test`.
@@ -53,7 +53,7 @@ Recommended split discipline:
 
 - `train`: used to optimize model weights.
 - `val`: used during development for checkpoint selection and error analysis.
-- `test`: used once at the end for an unbiased final report.
+- `test`: used once at the end for an unbiased final report. Do not tune hyperparameters on `test` — keep it reserved for the final evaluation only.
 
 Run validation and test evaluations into separate folders so the artifacts stay clearly separated:
 

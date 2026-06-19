@@ -31,8 +31,8 @@ def split_by_source_image(
     images_dir: Path,
     labels_dir: Path,
     train_ratio: float = 0.7,
-    val_ratio: float = 0.15,
-    test_ratio: float = 0.15,
+    val_ratio: float = 0.10,
+    test_ratio: float = 0.20,
     seed: int = 42,
 ) -> Dict[str, List[str]]:
     """
@@ -82,8 +82,8 @@ def create_split_directories(
     processed_dir: str,
     output_dir: str,
     train_ratio: float = 0.7,
-    val_ratio: float = 0.15,
-    test_ratio: float = 0.15,
+    val_ratio: float = 0.10,
+    test_ratio: float = 0.20,
     seed: int = 42,
     hard_link: bool = True,
 ) -> None:
@@ -155,8 +155,8 @@ def main():
     parser.add_argument("--processed", required=True, help="Processed tiles directory")
     parser.add_argument("--output", required=True, help="Output splits directory")
     parser.add_argument("--train-ratio", type=float, default=0.70)
-    parser.add_argument("--val-ratio", type=float, default=0.15)
-    parser.add_argument("--test-ratio", type=float, default=0.15)
+    parser.add_argument("--val-ratio", type=float, default=0.10)
+    parser.add_argument("--test-ratio", type=float, default=0.20)
     parser.add_argument("--seed", type=int, default=42)
     args = parser.parse_args()
 

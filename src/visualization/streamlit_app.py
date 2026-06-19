@@ -9,9 +9,14 @@ Run with:
 
 from collections import Counter
 import io
+import sys
 import time
 from pathlib import Path
 from urllib.parse import urlparse
+
+ROOT_DIR = Path(__file__).resolve().parents[2]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 
 import cv2
 import httpx
